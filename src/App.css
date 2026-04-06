@@ -218,15 +218,12 @@ body {
   margin-bottom: 1.25rem;
 }
 
-.about-card {
-  background: var(--mid);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2rem;
+.profile-card-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  transform: scale(0.75);       /* ← adjust this number */
+  transform-origin: top center;
 }
 
 .about-avatar {
@@ -337,8 +334,6 @@ body {
   justify-content: center;
   margin-top: 1rem;
 }
-
-
 
 /* ── SOCIAL ── */
 .social-grid {

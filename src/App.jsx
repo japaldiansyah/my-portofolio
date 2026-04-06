@@ -5,6 +5,7 @@ import GlassIcons from './component/GlassIcons';
 import { SiMysql, SiJavascript, SiHtml5 } from 'react-icons/si';
 import { FaReact, FaGitAlt, FaCss3Alt } from 'react-icons/fa';
 import SpotlightCard from './component/SpotlightCard';
+import ProfileCard from './component/ProfileCard';
 
   const skills = [
     { icon: <FaReact size={40} />,      label: 'React',      color: '#61DAFB' },
@@ -163,8 +164,21 @@ export default function App() {
                 help businesses achieve their goals.
               </p>
             </div>
-            <div className="about-card">
-            </div>
+            <div className="profile-card-wrapper">
+  <ProfileCard
+    name="Reza Faaldiansyah"
+    title="FullStack Developer"
+    handle="Reza Faaldiansyah"
+    avatarUrl="/src/assets/MyImage.png"
+    showUserInfo={false}
+    enableTilt={true}
+    enableMobileTilt={false}
+    onContactClick={() => console.log('Contact clicked')}
+    behindGlowColor="rgba(125, 190, 255, 0.67)"
+    behindGlowEnabled
+    innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+  />
+</div>
           </div>
         </div>
       </section>
@@ -246,7 +260,7 @@ export default function App() {
           </div>
         </div>
         <footer className="footer">
-          <p>Built with React + Vite · © {new Date().getFullYear()} Your Name</p>
+          <p>© {new Date().getFullYear()} Reza Faaldiansyah. All rights reserved.</p>
         </footer>
       </section>
       
