@@ -3,7 +3,8 @@ import SoftAurora from './component/SoftAurora';
 import './App.css';
 import GlassIcons from './component/GlassIcons';
 import { SiMysql, SiJavascript, SiHtml5 } from 'react-icons/si';
-import { FaReact, FaNodeJs, FaGitAlt, FaFigma, FaCss3Alt } from 'react-icons/fa';
+import { FaReact, FaGitAlt, FaCss3Alt } from 'react-icons/fa';
+import SpotlightCard from './component/SpotlightCard';
 
   const skills = [
     { icon: <FaReact size={40} />,      label: 'React',      color: '#61DAFB' },
@@ -29,10 +30,10 @@ import { FaReact, FaNodeJs, FaGitAlt, FaFigma, FaCss3Alt } from 'react-icons/fa'
   ];
 
 const socials = [
-  { label: 'GitHub', icon: '⌥', href: 'https://github.com/' },
-  { label: 'LinkedIn', icon: '◈', href: 'https://linkedin.com/' },
-  { label: 'Twitter / X', icon: '✕', href: 'https://twitter.com/' },
-  { label: 'Email', icon: '◉', href: 'mailto:you@email.com' },
+  { label: 'GitHub', icon: '⌥', href: 'https://github.com/japaldiansyah' },
+  { label: 'LinkedIn', icon: '◈', href: 'https://www.linkedin.com/in/reza-faaldiansyah-b01399375/' },
+  { label: 'Instagram', icon: '✕', href: 'https://www.instagram.com/rezafaal._/' },
+  { label: 'Email', icon: '◉', href: 'mailto:rezafaaldiansyah@email.com' },
 ];
 
 export default function App() {
@@ -52,10 +53,21 @@ export default function App() {
   const scrollProgress = Math.min(1, Math.max(0, rawProgress));
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  const auroraVisible = scrollProgress < 1;
 
   // Intersection observers for section animations
   useEffect(() => {
@@ -68,7 +80,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.05 }
     );
     if (aboutRef.current) observer.observe(aboutRef.current);
     if (skillsRef.current) observer.observe(skillsRef.current);
@@ -94,22 +106,24 @@ export default function App() {
       >
         {/* Aurora BG */}
         <div className="aurora-layer" style={{ opacity: auroraOpacity }}>
-          <SoftAurora
-            speed={0.6}
-            scale={1.5}
-            brightness={1}
-            color1="#f7f7f7"
-            color2="#e100ff"
-            noiseFrequency={2.5}
-            noiseAmplitude={1}
-            bandHeight={0.5}
-            bandSpread={1}
-            octaveDecay={0.1}
-            layerOffset={0}
-            colorSpeed={1}
-            enableMouseInteraction
-            mouseInfluence={0.25}
-          />
+          {auroraVisible && (  // ← only render when visible
+            <SoftAurora
+              speed={0.4}
+              scale={1.2}          
+              brightness={1}
+              color1="#f7f7f7"
+              color2="#e100ff"
+              noiseFrequency={1.5}  
+              noiseAmplitude={0.8}  
+              bandHeight={0.5}
+              bandSpread={1}
+              octaveDecay={0.1}
+              layerOffset={0}
+              colorSpeed={0.8}      
+              enableMouseInteraction={false}  
+              mouseInfluence={0}
+            />
+          )}
         </div>
 
         {/* Black overlay fading in */}
@@ -179,29 +193,28 @@ export default function App() {
           <div className="section-label">03 — Projects</div>
           <h2 className="section-title">Things I've<br />built recently.</h2>
           <div className="projects-grid">
-            {projects.map((project, i) => (
-              <a
-                key={i}
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-                className="project-card"
-                style={{ transitionDelay: `${i * 120}ms` }}
-              >
-                {/* ← hapus seluruh bagian ini */}
-                {/* <div className="project-image-wrap">
-                  <img src={project.image} alt={project.title} className="project-image" />
-                  <div className="project-overlay">
-                    <span>View Project →</span>
+            <div className="projects-grid">
+              {projects.map((project, i) => (
+                <SpotlightCard
+                  key={i}
+                  className="project-card"
+                  spotlightColor="rgba(225, 0, 255, 0.15)"
+                >
+                  <div className="project-info">
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-desc">{project.description}</p>
+                    <a                     
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-link"
+                    >
+                      View Project →
+                    </a>
                   </div>
-                </div> */}
-
-                <div className="project-info">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-desc">{project.description}</p>
-                </div>
-              </a>
-            ))}
+                </SpotlightCard>
+              ))}
+            </div>
           </div>
         </div>
       </section>
