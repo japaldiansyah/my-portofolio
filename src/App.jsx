@@ -6,6 +6,7 @@ import { SiMysql, SiJavascript, SiHtml5 } from 'react-icons/si';
 import { FaReact, FaGitAlt, FaCss3Alt } from 'react-icons/fa';
 import SpotlightCard from './component/SpotlightCard';
 import ProfileCard from './component/ProfileCard';
+import MyImage from './assets/MyImage.png'
 
   const skills = [
     { icon: <FaReact size={40} />,      label: 'React',      color: '#61DAFB' },
@@ -169,7 +170,7 @@ export default function App() {
     name="Reza Faaldiansyah"
     title="FullStack Developer"
     handle="Reza Faaldiansyah"
-    avatarUrl="/src/assets/MyImage.png"
+    avatarUrl="./src/assets/MyImage.png"
     showUserInfo={false}
     enableTilt={true}
     enableMobileTilt={false}
